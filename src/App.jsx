@@ -115,14 +115,14 @@ export default function CgpaCalculatorApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 flex flex-col items-center">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-md p-6">
-        <header className="flex items-center justify-between mb-4">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 flex flex-col items-center">
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-md p-4 sm:p-6">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <h1 className="text-2xl font-semibold">CGPA / SGPA Calculator</h1>
-          <div className="flex gap-2">
-            <button onClick={() => addSemester('quick')} className="px-3 py-1 rounded-md border">Add Quick Semester</button>
-            <button onClick={() => addSemester('detailed')} className="px-3 py-1 rounded-md border">Add Detailed Semester</button>
-            <button onClick={importSample} className="px-3 py-1 rounded-md bg-blue-600 text-white">Load Example</button>
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <button onClick={() => addSemester('quick')} className="w-full sm:w-auto px-3 py-2 rounded-md border text-sm sm:text-base">Add Quick Semester</button>
+            <button onClick={() => addSemester('detailed')} className="w-full sm:w-auto px-3 py-2 rounded-md border text-sm sm:text-base">Add Detailed Semester</button>
+            <button onClick={importSample} className="w-full sm:w-auto px-3 py-2 rounded-md bg-blue-600 text-white text-sm sm:text-base">Load Example</button>
           </div>
         </header>
 
@@ -132,18 +132,18 @@ export default function CgpaCalculatorApp() {
           )}
 
           {semesters.map((sem, idx) => (
-            <section key={sem.id} className="border rounded-lg p-4">
-              <div className="flex items-center justify-between">
+            <section key={sem.id} className="border rounded-lg p-3 sm:p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <input value={sem.name} onChange={e => updateSemester(sem.id, { name: e.target.value })} className="font-semibold text-lg" />
+                  <input value={sem.name} onChange={e => updateSemester(sem.id, { name: e.target.value })} className="font-semibold text-lg border rounded px-2 py-1 w-full max-w-[220px] sm:max-w-none focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   <span className="text-sm text-gray-500">Mode: {sem.mode}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <select value={sem.mode} onChange={e => updateSemester(sem.id, { mode: e.target.value })} className="border rounded px-2 py-1">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <select value={sem.mode} onChange={e => updateSemester(sem.id, { mode: e.target.value })} className="w-full sm:w-auto border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="quick">Quick (totals)</option>
                     <option value="detailed">Detailed (subjects)</option>
                   </select>
-                  <button onClick={() => removeSemester(sem.id)} className="text-red-600">Remove</button>
+                  <button onClick={() => removeSemester(sem.id)} className="w-full sm:w-auto px-3 py-2 border rounded text-red-600">Remove</button>
                 </div>
               </div>
 
@@ -151,11 +151,11 @@ export default function CgpaCalculatorApp() {
                 <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
                   <label className="flex flex-col">
                     Semester Credits
-                    <input type="number" min="0" value={sem.credits} onChange={e => updateSemester(sem.id, { credits: Number(e.target.value) })} className="mt-1 p-2 border rounded" />
+                    <input type="number" min="0" value={sem.credits} onChange={e => updateSemester(sem.id, { credits: Number(e.target.value) })} className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </label>
                   <label className="flex flex-col">
                     Semester Credit Points
-                    <input type="number" min="0" value={sem.creditPoints} onChange={e => updateSemester(sem.id, { creditPoints: Number(e.target.value) })} className="mt-1 p-2 border rounded" />
+                    <input type="number" min="0" value={sem.creditPoints} onChange={e => updateSemester(sem.id, { creditPoints: Number(e.target.value) })} className="mt-1 p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </label>
                   <div className="flex items-end">
                     <div className="text-sm text-gray-600">Quick mode lets you paste the total credits & credit-points (like on your grade card).</div>
@@ -170,9 +170,9 @@ export default function CgpaCalculatorApp() {
                   <div className="space-y-2">
                     {sem.subjects.map(sub => (
                       <div key={sub.id} className="grid grid-cols-1 md:grid-cols-5 gap-2 items-end">
-                        <input placeholder="Subject name" value={sub.name} onChange={e => updateSubject(sem.id, sub.id, { name: e.target.value })} className="p-2 border rounded md:col-span-2" />
-                        <input type="number" min="0" value={sub.credits} onChange={e => updateSubject(sem.id, sub.id, { credits: Number(e.target.value) })} className="p-2 border rounded" placeholder="Credits" />
-                        <input type="number" min="0" value={sub.gradePoint} onChange={e => updateSubject(sem.id, sub.id, { gradePoint: Number(e.target.value) })} className="p-2 border rounded" placeholder="Grade point" />
+                        <input placeholder="Subject name" value={sub.name} onChange={e => updateSubject(sem.id, sub.id, { name: e.target.value })} className="p-2 border rounded md:col-span-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <input type="number" min="0" value={sub.credits} onChange={e => updateSubject(sem.id, sub.id, { credits: Number(e.target.value) })} className="p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Credits" />
+                        <input type="number" min="0" value={sub.gradePoint} onChange={e => updateSubject(sem.id, sub.id, { gradePoint: Number(e.target.value) })} className="p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Grade point" />
                         <div className="flex gap-2">
                           <button onClick={() => removeSubject(sem.id, sub.id)} className="text-red-600">Remove</button>
                         </div>
@@ -195,10 +195,10 @@ export default function CgpaCalculatorApp() {
           ))}
 
           {semesters.length > 0 && (
-            <section className="border rounded-lg p-4">
+            <section className="border rounded-lg p-3 sm:p-4">
               <h2 className="text-lg font-semibold mb-2">Summary</h2>
               <div className="overflow-x-auto">
-                <table className="w-full table-auto text-sm">
+                <table className="w-full table-auto text-xs sm:text-sm min-w-[600px]">
                   <thead>
                     <tr className="text-left text-gray-600">
                       <th className="p-2">Semester</th>
@@ -228,10 +228,10 @@ export default function CgpaCalculatorApp() {
                 </table>
               </div>
 
-              <div className="mt-4 flex gap-2">
-                <button onClick={downloadCSV} className="px-3 py-2 bg-green-600 text-white rounded">Export CSV</button>
-                <button onClick={() => { navigator.clipboard?.writeText(JSON.stringify(results, null, 2)); }} className="px-3 py-2 border rounded">Copy JSON</button>
-                <button onClick={() => { setSemesters([]); }} className="px-3 py-2 border rounded text-red-600">Clear All</button>
+              <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                <button onClick={downloadCSV} className="w-full sm:w-auto px-3 py-2 bg-green-600 text-white rounded">Export CSV</button>
+                <button onClick={() => { navigator.clipboard?.writeText(JSON.stringify(results, null, 2)); }} className="w-full sm:w-auto px-3 py-2 border rounded">Copy JSON</button>
+                <button onClick={() => { setSemesters([]); }} className="w-full sm:w-auto px-3 py-2 border rounded text-red-600">Clear All</button>
               </div>
             </section>
           )}
