@@ -28,7 +28,7 @@ A modern, responsive CGPA (Cumulative Grade Point Average) calculator built with
 
 ## 🚀 Live Demo
 
-[Deploy to Vercel](#deployment) to get your own live instance.
+[Deploy to Vercel](https://cgpa-calculator-sakec.vercel.app/) to get your own live instance.
 
 ## 🛠️ Tech Stack
 
