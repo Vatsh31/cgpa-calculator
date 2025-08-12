@@ -6,7 +6,7 @@ import React, { useState, useMemo } from 'react';
 // - Add semesters, either as "Quick" (enter semester total credits + credit-points)
 //   or "Detailed" (enter subjects with credit and grade-point -> calculates credit-points)
 // - Calculates SGPA for each semester, running cumulative CGPA, and converts to %
-// - Default conversion: if CGPA >= 7 then % = 7.4 * CGPA + 12, otherwise % = 10 * CGPA
+// - Default conversion: if CGPA >= 7 then % = 7.4 * CGPA + 12, otherwise % = 7.1 * CGPA + 12
 // - Export results as CSV
 // - Input validation and helpful UI hints
 
@@ -74,7 +74,7 @@ export default function CgpaCalculatorApp() {
       cumulativeCredits += credits;
       cumulativeCreditPoints += creditPoints;
       const cgpa = cumulativeCredits > 0 ? (cumulativeCreditPoints / cumulativeCredits) : 0;
-      const percentage = cgpa >= 7 ? (7.4 * cgpa + 12) : (10 * cgpa);
+      const percentage = cgpa >= 7 ? (7.4 * cgpa + 12) : (7.1 * cgpa + 12);
 
       return {
         id: sem.id,
@@ -241,7 +241,7 @@ export default function CgpaCalculatorApp() {
         <footer className="mt-6 text-sm text-gray-500">
           <div>Notes:</div>
           <ul className="list-disc ml-6">
-            <li>Default percentage conversion: <code>% = 7.4 × CGPA + 12</code> when CGPA ≥ 7, otherwise <code>% = 10 × CGPA</code>. You can change this rule in the source if your handbook uses a different conversion.</li>
+            <li>Default percentage conversion: <code>% = 7.4 × CGPA + 12</code> when CGPA ≥ 7, otherwise <code>% = 7.1 × CGPA + 12</code>. You can change this rule in the source if your handbook uses a different conversion.</li>
             <li>Quick mode is useful when you already have the semester total credits and credit-points from your grade card. Detailed mode calculates credit-points from subject credits × grade-point (enter grade points like 10/9/8 etc.).</li>
             <li>This is a client-side React component — no server required. See run instructions below.</li>
           </ul>
